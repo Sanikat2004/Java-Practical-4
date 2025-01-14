@@ -1,0 +1,248 @@
+class Practical4{
+//getByte
+public int getByte(int num)
+   {
+      int result;
+      double temp;
+      if(num>0)
+       {
+            temp=num/128;
+            if(temp%2==0)
+            {
+                result=num%128;
+            }
+           else
+            {
+               result=num%128-128;
+            }
+       }
+     else
+       {
+          temp=Math.floor(num/128);
+          if(temp%2==0)
+           {
+             result=num%128;
+           }
+           else if(num%128==0 && temp%2!=0)
+           {
+             result=-128;
+           }
+           else
+           {
+             result=num%128+128;
+           }
+      }
+       return result;
+}
+........................................................................................................
+
+//getShort
+public int getShort(int num)
+  {
+        int result;
+        double temp;
+        if(num>0)
+        {
+           temp=num/32768;
+           if(temp%2==0)
+            {
+                result=num%32768;
+            }
+            else
+            {
+                result=num%32768-32768;
+            }
+        }
+        else
+        {
+            temp=Math.floor(num/32768);
+            if(temp%2==0)
+            {
+                result=num%32768;
+            }
+            else if(num%32768==0 && temp%2!=0)
+            {
+               result=-32768;
+            }
+            else
+            {
+                result=num%32768+32768;
+            }
+        }
+        return result;
+  }
+ ...... .........................................................................................................
+//getNumber
+public int getNumber(int num, String type )
+  {
+      int result;
+      double temp;
+      if(type.equalsIgnoreCase("byte")==true)
+      {
+         if(num>0)
+         {
+            temp=num/128;
+            if(temp%2==0)
+            {
+                result=num%128;
+            }
+           else
+            {
+               result=num%128-128;
+            }
+       }
+     else
+       {
+          temp=Math.floor(num/128);
+          if(temp%2==0)
+           {
+             result=num%128;
+           }
+           else if(num%128==0 && temp%2!=0)
+           {
+             result=-128;
+           }
+           else
+           {
+             result=num%128+128;
+           }
+      }
+       return result;
+    } 
+    else
+    {
+        if(num>0)
+        {
+           temp=num/32768;
+           if(temp%2==0)
+            {
+                result=num%32768;
+            }
+            else
+            {
+                result=num%32768-32768;
+            }
+        }
+        else
+        {
+            temp=Math.floor(num/32768);
+            if(temp%2==0)
+            {
+                result=num%32768;
+            }
+            else if(num%32768==0 && temp%2!=0)
+            {
+               result=-32768;
+            }
+            else
+            {
+                result=num%32768+32768;
+            }
+        }
+        return result;
+  }
+}
+...................................................................................................................................
+
+//toXXSystem(String num ,String XX)
+
+public String toXXSystem(String num,String XX)
+{
+ //decimal to binary,octal,hexa
+    int decimalvalue=Integer.parseInt(num);
+    int octalvalue=Integer.parseInt(num);
+    int hexvalue=Integer.parseInt(num);
+    int remainder=0;
+    String binary="";
+    String octal="";
+    String hex="";
+    if(XX.equalsIgnoreCase("B")==true)
+       {
+           if(decimalvalue<0)
+               {
+                   System.out.println("Negative inputs are Invalid");
+               }
+               while(decimalvalue>0)
+                {
+                   remainder=decimalvalue%2;
+                   binary=remainder+binary;
+                   decimalvalue=decimalvalue/2;
+                }
+          return "0b"+ binary;    
+      }    
+      else if(XX.equalsIgnoreCase("O")==true)
+        {
+           if(octalvalue<0)
+              {
+                 System.out.println("Negative inputs are Invalid");
+              }      
+            while(octalvalue>0)
+               {
+                   remainder=octalvalue%8;
+                   octal=remainder+octal;
+                   octalvalue=octalvalue/8;
+               }
+         return "O"+octal;
+       }  
+       else if(XX.equalsIgnoreCase("h")==true)
+       {
+           if(hexvalue<0)
+             {
+                System.out.println("Negative inputs are Invalid");                                                                                                                  
+             }                                                                                                                                                                       
+           while(hexvalue>0)                                                                                                                                                       
+             {
+                 remainder=hexvalue%16;
+                 hex=hexSymbols[remainder]+hex;
+                 hexvalue=hexvalue/16;
+             }
+         return "0x"+hex ;
+      }
+
+       else
+        {
+           System.out.println("Invalid Input");
+        }
+      return "";
+  }
+  
+...................................................................................................................................  
+  
+ public String toXXSystem(String num,String XX)
+  {
+    //Binary to decimal,octal,hexa
+      int decimal = 0; 
+      int power = 0; 
+      if (XX.equalsIgnoreCase("d"))
+        {
+             if(decimal<0)
+                {
+                   System.out.println("invalid input");
+                }
+              if (num.startsWith("0b")) 
+                 { 
+                   num = num.substring(2); 
+                 }
+             for (int i = num.length() - 1; i >= 0; i--)
+                {
+                    if (num.charAt(i) == '1') 
+                       {
+                         decimal += Math.pow(2, power); 
+                       }
+                    power++;
+                }
+          return Integer.toString(decimal); 
+       }
+       else 
+       {
+           System.out.println("Invalid Input");
+           return ""; 
+        }
+    }
+   
+
+
+
+  
+
+
