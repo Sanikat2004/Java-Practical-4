@@ -35,7 +35,6 @@ public int getByte(int num)
        return result;
 }
 ........................................................................................................
-
 //getShort
 public int getShort(int num)
   {
@@ -112,7 +111,7 @@ public int getNumber(int num, String type )
     else
     {
         if(num>0)
-        {
+{
            temp=num/32768;
            if(temp%2==0)
             {
@@ -143,7 +142,6 @@ public int getNumber(int num, String type )
   }
 }
 ...................................................................................................................................
-
 //toXXSystem(String num ,String XX)
 
 public String toXXSystem(String num,String XX)
@@ -156,6 +154,7 @@ public String toXXSystem(String num,String XX)
     String binary="";
     String octal="";
     String hex="";
+    
     if(XX.equalsIgnoreCase("B")==true)
        {
            if(decimalvalue<0)
@@ -170,7 +169,7 @@ public String toXXSystem(String num,String XX)
                 }
           return "0b"+ binary;    
       }    
-      else if(XX.equalsIgnoreCase("O")==true)
+      else if(XX.startsWith("0"))
         {
            if(octalvalue<0)
               {
@@ -182,10 +181,11 @@ public String toXXSystem(String num,String XX)
                    octal=remainder+octal;
                    octalvalue=octalvalue/8;
                }
-         return "O"+octal;
+  return "O"+octal;
        }  
        else if(XX.equalsIgnoreCase("h")==true)
        {
+          char[] hexsymbols={'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};  
            if(hexvalue<0)
              {
                 System.out.println("Negative inputs are Invalid");                                                                                                                  
@@ -193,7 +193,7 @@ public String toXXSystem(String num,String XX)
            while(hexvalue>0)                                                                                                                                                       
              {
                  remainder=hexvalue%16;
-                 hex=hexSymbols[remainder]+hex;
+                 hex=hexsymbols[remainder]+hex;
                  hexvalue=hexvalue/16;
              }
          return "0x"+hex ;
@@ -207,11 +207,12 @@ public String toXXSystem(String num,String XX)
   }
   
 ...................................................................................................................................  
-  
- public String toXXSystem(String num,String XX)
+  //Binary to Decimal,Hexadecimal,Octal
+public String toXXSystem(String num,String XX)
   {
-    //Binary to decimal,octal,hexa
+    //Binary to Decimal
       int decimal = 0; 
+      int octalvalue=0;
       int power = 0; 
       if (XX.equalsIgnoreCase("d"))
         {
@@ -233,16 +234,50 @@ public String toXXSystem(String num,String XX)
                 }
           return Integer.toString(decimal); 
        }
+//Binary to Octal
+        else if (XX.equalsIgnoreCase("O"))
+        {
+          if(num.startsWith("0b"))
+          {
+             num=num.substring(2);
+          }
+         decimal=Integer.parseInt(toXXSystem(num,"d"));
+         String octal="";
+         while(decimal>0)
+         {
+           octalvalue=decimal%8;
+  octal=octalvalue+octal;
+           decimal=decimal/8;
+         }
+           return "0"+octal;
+      }
+ 
+ //Binary to hexadecimal
+       else if (XX.equalsIgnoreCase("h"))
+       {
+          if(num.startsWith("0b"))
+          {
+             num=num.substring(2);
+          }
+          decimal=Integer.parseInt(toXXSystem(num,"d"));
+          char[] hexsymbols={'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+          String hex="";
+          while(decimal>0)
+          {
+            int remainder=decimal%16;
+            hex=hexsymbols[remainder]+hex;
+            decimal=decimal/16;
+            }
+            return "0x"+hex;
+        }
+       
+ 
+        
        else 
        {
            System.out.println("Invalid Input");
            return ""; 
         }
     }
-   
-
-
-
-  
-
-
+..............................................................................................................................
+ 
